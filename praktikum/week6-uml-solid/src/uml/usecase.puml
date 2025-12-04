@@ -1,0 +1,30 @@
+@startuml UseCase_AgriPOS
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Kasir" as Kasir
+actor "Admin" as Admin
+actor "Customer" as Customer
+actor "Payment Gateway" as PG
+
+rectangle "Agri-POS" {
+  Kasir -- (Buat Transaksi)
+  Kasir -- (Tambah Produk ke Keranjang)
+  Kasir -- (Checkout / Pembayaran)
+  Kasir -- (Cetak Struk)
+
+  Admin -- (Kelola Produk)
+  Admin -- (Lihat Laporan)
+
+  (Checkout / Pembayaran) .> (Cetak Struk) : include
+  (Checkout / Pembayaran) .> (Verifikasi Pembayaran) : include
+  (Verifikasi Pembayaran) .> PG : extend
+}
+note left of Kasir
+ Use cases:
+ - Kelola transaksi (kasir)
+ - Kelola produk (admin)
+ - Pembayaran (tunai/e-wallet)
+ - Cetak struk & laporan
+end note
+@enduml

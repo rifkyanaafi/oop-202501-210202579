@@ -1,0 +1,36 @@
+@startuml Activity_Checkout
+|Kasir|
+start
+:Mulai transaksi;
+:Tambah produk ke keranjang;
+:Hitung subtotal;
+fork
+  :Tampilkan ringkasan;
+fork again
+  :Tunggu input metode pembayaran;
+end fork
+
+|Sistem|
+if (Metode Tunai?) then (yes)
+  ->[Tunai] :Tampilkan total;
+  :Terima pembayaran tunai;
+  if (tunai >= totalBayar) then (sukses)
+    :Selesaikan pembayaran;
+    -> Kasir :Cetak struk;
+  else (kurang)
+    :Tolak pembayaran;
+  endif
+else (no/e-wallet)
+  ->[EWallet] :Minta verifikasi OTP;
+  |Payment Gateway|
+  if (OTP valid & saldo cukup) then (sukses)
+    :Konfirmasi pembayaran;
+    -> Sistem :Update transaksi;
+    -> Kasir :Cetak struk;
+  else (gagal)
+    :Tampilkan error (saldo/OTP);
+  endif
+endif
+
+stop
+@enduml

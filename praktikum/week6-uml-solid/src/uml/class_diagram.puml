@@ -1,0 +1,91 @@
+@startuml ClassDiagram_AgriPOS
+package com.upb.agripos.product {
+  class Product {
+    - String kode
+    - String nama
+    - String kategori
+    - double harga
+    - int stok
+    + getKode(): String
+    + getNama(): String
+    + getHarga(): double
+    + reduceStock(qty): void
+  }
+
+  interface ProductRepository {
+    + save(Product): void
+    + findById(String): Product
+    + findAll(): List
+    + delete(String): void
+  }
+
+  class InMemoryProductRepository implements ProductRepository {
+    - Map<String, Product> store
+    + save(Product)
+    + findById(String)
+  }
+
+  class ProductService {
+    - ProductRepository repo
+    + addProduct(Product)
+    + updateProduct(Product)
+    + removeProduct(String)
+    + listProducts(): List
+  }
+}
+
+package com.upb.agripos.payment {
+  interface PaymentMethod {
+    + double biaya()
+    + boolean prosesPembayaran(Transaction t)
+    + Receipt cetakStruk(Transaction t)
+  }
+
+  class CashPayment implements PaymentMethod {
+    - double tunai
+    + biaya(): double
+    + prosesPembayaran(Transaction): boolean
+    + cetakStruk(Transaction): Receipt
+  }
+
+  class EWalletPayment implements PaymentMethod {
+    - String akun
+    - String otp
+    + biaya(): double
+    + prosesPembayaran(Transaction): boolean
+    + cetakStruk(Transaction): Receipt
+  }
+
+  class PaymentService {
+    - PaymentMethodResolver resolver
+    + processPayment(Transaction, methodType)
+  }
+
+  interface PaymentMethodResolver {
+    + PaymentMethod resolve(String methodType)
+  }
+
+  class DefaultPaymentMethodResolver implements PaymentMethodResolver {
+    + resolve(...)
+  }
+}
+
+package com.upb.agripos.transaction {
+  class Transaction {
+    - String id
+    - List<Item> items
+    - double total
+    - PaymentStatus status
+    + addItem(Product, qty)
+    + calculateTotal()
+  }
+  class Item { - Product product; - int qty; }
+  enum PaymentStatus { PENDING, PAID, FAILED }
+}
+
+ProductService "1" o-- "0..*" Product
+PaymentService --|> PaymentMethodResolver
+PaymentMethod <|.. CashPayment
+PaymentMethod <|.. EWalletPayment
+Transaction "1" *-- "0..*" Item
+@enduml

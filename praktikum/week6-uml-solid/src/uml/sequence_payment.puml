@@ -1,0 +1,38 @@
+@startuml Sequence_Payment
+actor Kasir
+participant POS as "PointOfSale"
+participant Cart
+participant PaymentService
+participant CashPayment
+participant EWalletPayment
+participant PG as "PaymentGateway"
+
+Kasir -> POS: startTransaction()
+POS -> Cart: createCart()
+Kasir -> POS: addItem(productId, qty)
+POS -> Cart: add(product)
+POS -> POS: calculateTotal()
+
+alt Cash Payment
+  Kasir -> POS: payCash(amount)
+  POS -> PaymentService: process(paymentInfo)
+  PaymentService -> CashPayment: validate(amount)
+  CashPayment --> PaymentService: result(success)
+  PaymentService -> POS: onSuccess()
+  POS -> Kasir: printReceipt()
+else EWallet Payment
+  Kasir -> POS: payEWallet(account, otp)
+  POS -> PaymentService: process(paymentInfo)
+  PaymentService -> EWalletPayment: validate(account, otp)
+  EWalletPayment -> PG: authorize(account, otp)
+  PG --> EWalletPayment: authResult(success/failed)
+  EWalletPayment --> PaymentService: result(success/failed)
+  alt success
+    PaymentService -> POS: onSuccess()
+    POS -> Kasir: printReceipt()
+  else failed
+    PaymentService -> POS: onFailure(reason)
+    POS -> Kasir: showError()
+  end
+end
+@enduml
