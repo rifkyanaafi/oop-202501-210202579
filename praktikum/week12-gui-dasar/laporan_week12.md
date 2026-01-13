@@ -54,6 +54,7 @@ btnAdd.setOnAction(event -> {
 ## Hasil Eksekusi
 GUI JavaFX berhasil menampilkan form input dan daftar produk.
 Data yang dimasukkan melalui tombol Tambah Produk muncul di ListView dan tersimpan ke database PostgreSQL.
+![alt text](image.png)
 
 ---
 

@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile Java",
+      "type": "shell",
+      "command": "javac",
+      "args": [
+        "--module-path",
+        "${workspaceFolder}/praktikum/week12-gui-dasar/lib/javafx-sdk-21/lib",
+        "--add-modules",
+        "javafx.controls,javafx.fxml",
+        "-cp",
+        "${workspaceFolder}/praktikum/week12-gui-dasar/lib/postgresql-42.7.1.jar",
+        "-d",
+        "${workspaceFolder}/praktikum/week12-gui-dasar/bin",
+        "-sourcepath",
+        "${workspaceFolder}/praktikum/week12-gui-dasar/src/main/java",
+        "${workspaceFolder}/praktikum/week12-gui-dasar/src/main/java/com/upb/agripos/AppJavaFX.java"
+      ],
+      "problemMatcher": ["$javac"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
