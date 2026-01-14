@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "type": "java",
+        "name": "Launch Java Program",
+        "request": "launch",
+        "mainClass": ""
+    },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "AppJavaFX",
+            "request": "launch",
+            "mainClass": "com.upb.agripos.AppJavaFX",
+            "projectName": "agripos-gui",
+            "vmArgs": "--module-path \"C:/javafx/javafx-sdk-21/lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "ProductLogicTest",
+            "request": "launch",
+            "mainClass": "com.upb.agripos.test.ProductLogicTest",
+            "projectName": "agripos-gui"
+        },
+        {
+            "type": "java",
+            "name": "AppMVC",
+            "request": "launch",
+            "mainClass": "com.upb.agripos.AppMVC",
+            "projectName": "week10-pattern-testing"
+        },
+        {
+            "type": "java",
+            "name": "MainDAOTest",
+            "request": "launch",
+            "mainClass": "com.upb.agripos.MainDAOTest",
+            "projectName": "week11-dao-database"
+        }
+    ]
+}
