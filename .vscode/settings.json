@@ -1,0 +1,18 @@
+{
+    "java.project.sourcePaths": [
+        "praktikum/week4-polymorphism/src/main/java",
+        "praktikum/week2-class-object/src/main/java",
+        "praktikum/week14-integrasi-individu/src/main/java",
+        "praktikum/week14-integrasi-individu/src",
+        "praktikum/week13-gui-lanjutan/src/main/java",
+        "praktikum/week13-gui-lanjutan/src",
+        "praktikum/week12-gui-dasar/src/main/java",
+        "praktikum/week12-gui-dasar/src",
+        "praktikum/week11-dao-database/src/main/java",
+        "praktikum/week11-dao-database/src",
+        "praktikum/week10-pattern-testing/src/test/java",
+        "praktikum/week10-pattern-testing/src/main/java",
+        "praktikum/week1-setup-hello-pos/src/main/java",
+        "praktikum/week15-proyek-kelompok/src/main/java/com/upb/agripos"
+    ]
+}
